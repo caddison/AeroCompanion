@@ -44,7 +44,7 @@
             height: 80px;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            margin: 0; /* Ensure no additional margin is affecting the position */
+            margin: 0;
         }
 
         #left-gimbal {
@@ -56,13 +56,13 @@
         }
 
         #command-input {
-            flex-grow: 1; /* This will allow the input box to expand to fill available space */
+            flex-grow: 1;
             padding: 10px;
             background: white;
             border: 1px solid #ccc;
             border-radius: 5px;
             text-align: center;
-            margin: 0 10px; /* Ensures some spacing between elements */
+            margin: 0 10px;
         }
 
         #record-button {
@@ -169,6 +169,7 @@
                     const commands = ['move forward', 'move backward', 'pan left', 'pan right', 'move up', 'move down', 'roll left', 'roll right'];
                     if (commands.includes(transcript)) {
                         appendCommand(transcript.charAt(0).toUpperCase() + transcript.slice(1));
+                        sendUdpCommand(transcript);
                     }
                 };
 
@@ -232,125 +233,31 @@
 
         let lastCommand = '';
         let commandTimeout;
+        let peerConnection;
+        let dataChannel;
 
-        // Initialize the joysticks using nipplejs
-        const leftJoystick = nipplejs.create({
-            zone: document.getElementById('left-joystick'),
-            mode: 'static',
-            position: { left: '50%', top: '50%' },
-            color: 'red'
-        });
+        // Initialize WebRTC connection
+        async function initializeWebRTC() {
+            const configuration = {
+                iceServers: [
+                    { urls: 'stun:stun.l.google.com:19302' }
+                ]
+            };
+            peerConnection = new RTCPeerConnection(configuration);
 
-        const rightJoystick = nipplejs.create({
-            zone: document.getElementById('right-joystick'),
-            mode: 'static',
-            position: { left: '50%', top: '50%' },
-            color: 'blue'
-        });
-
-        leftJoystick.on('move', (evt, data) => {
-            processJoystickCommand('left', data);
-        });
-
-        rightJoystick.on('move', (evt, data) => {
-            processJoystickCommand('right', data);
-        });
-
-        function startVideoStream() {
-            const streamUrl = 'http://your-drone-video-stream-url';
-            video.src = streamUrl;
-
-            video.onerror = () => {
-                noSignal.style.display = 'block';
+            dataChannel = peerConnection.createDataChannel("commandChannel");
+            dataChannel.onopen = () => {
+                console.log("Data channel is open");
+            };
+            dataChannel.onclose = () => {
+                console.log("Data channel is closed");
             };
 
-            video.onplay = () => {
-                noSignal.style.display = 'none';
+            peerConnection.onicecandidate = (event) => {
+                if (event.candidate) {
+                    // Send the ICE candidate to the other peer (not implemented in this example)
+                }
             };
-        }
 
-        function processJoystickCommand(joystick, data) {
-            let commandString = '';
-
-            if (joystick === 'left') {
-                if (data.angle.degree > 45 && data.angle.degree <= 135) {
-                    commandString = 'Move Up';
-                } else if (data.angle.degree > 135 && data.angle.degree <= 225) {
-                    commandString = 'Pan Left';
-                } else if (data.angle.degree > 225 && data.angle.degree <= 315) {
-                    commandString = 'Move Down';
-                } else {
-                    commandString = 'Pan Right';
-                }
-            } else if (joystick === 'right') {
-                if (data.angle.degree > 45 && data.angle.degree <= 135) {
-                    commandString = 'Move Forward';
-                } else if (data.angle.degree > 135 && data.angle.degree <= 225) {
-                    commandString = 'Roll Left';
-                } else if (data.angle.degree > 225 && data.angle.degree <= 315) {
-                    commandString = 'Move Backward';
-                } else {
-                    commandString = 'Roll Right';
-                }
-            }
-
-            if (commandString !== lastCommand) {
-                lastCommand = commandString;
-                appendCommand(commandString);
-
-                fetch('http://your-drone-command-url', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ joystick, angle: data.angle.degree, distance: data.distance })
-                }).then(response => response.json())
-                  .then(data => {
-                      appendCommand('Command Sent: ' + data.status);
-                  }).catch(error => {
-                      console.log('Error sending command: ' + error.message + '\nPlease check the URL and the server status.');
-                  });
-            }
-
-            // Clear previous timeout and set a new one to reset the lastCommand after a delay
-            clearTimeout(commandTimeout);
-            commandTimeout = setTimeout(() => {
-                lastCommand = '';
-            }, 500); // Adjust the delay as needed
-        }
-
-        function appendCommand(command) {
-            commandInput.value += command + '     \n'; // Add 5 spaces between each command
-            commandInput.scrollTop = commandInput.scrollHeight; // Scroll to the bottom
-        }
-
-        function sendCommand(command) {
-            fetch('http://your-drone-command-url', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ command })
-            }).then(response => response.json())
-              .then(data => {
-                  appendCommand('Command Sent: ' + data.status);
-              }).catch(error => {
-                  console.log('Error sending command: ' + error.message + '\nPlease check the URL and the server status.');
-              });
-        }
-
-        recordButton.addEventListener('click', () => {
-            const command = 'TOGGLE_RECORD';
-            sendCommand(command);
-        });
-
-        streamToggle.addEventListener('click', () => {
-            const command = 'TOGGLE_STREAM';
-            sendCommand(command);
-        });
-
-        // Start the video stream on page load
-        startVideoStream();
-    </script>
-</body>
-</html>
+            const offer = await peerConnection.createOffer();
+            await peerConnection.setLocal
