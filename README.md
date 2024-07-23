@@ -4,8 +4,8 @@ Project Overview
 This project leverages the powerful capabilities of the Raspberry Pi 5 and Pixhawk 6X flight controller to create a cutting-edge drone capable of executing complex autonomous tasks. The drone is designed to operate without GPS, utilizing IMU data and computer vision for navigation and obstacle avoidance.
 
 Key Features
-Autonomous Flight Control
 
+Autonomous Flight Control
 Utilizes the Pixhawk 6X flight controller for precise and reliable flight control.
 Implements advanced AI models developed in Python to handle autonomous navigation and decision-making.
 
