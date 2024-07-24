@@ -1,7 +1,3 @@
-Sure, here is a professional and visually appealing version of the README.md file for your GitHub page:
-
----
-
 # Aero Companion
 
 Welcome to the repository for **Aero Companion**! This project aims to develop a fully autonomous drone equipped with advanced features such as real-time video streaming, computer vision, obstacle avoidance, and AI-driven navigation. Below is a detailed overview of the project, its components, and functionalities.
