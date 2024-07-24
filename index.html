@@ -44,7 +44,7 @@
             height: 80px;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
-            margin: 0;
+            margin: 0; /* Ensure no additional margin is affecting the position */
         }
 
         #left-gimbal {
@@ -56,13 +56,13 @@
         }
 
         #command-input {
-            flex-grow: 1;
+            flex-grow: 1; /* This will allow the input box to expand to fill available space */
             padding: 10px;
             background: white;
             border: 1px solid #ccc;
             border-radius: 5px;
             text-align: center;
-            margin: 0 10px;
+            margin: 0 10px; /* Ensures some spacing between elements */
         }
 
         #record-button {
@@ -151,6 +151,7 @@
         <div id="right-joystick" class="joystick"></div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nipplejs/0.8.0/nipplejs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const recordButton = document.getElementById('record-button');
@@ -166,7 +167,7 @@
 
                 recognition.onresult = (event) => {
                     const transcript = event.results[event.results.length - 1][0].transcript.trim().toLowerCase();
-                    const commands = ['move forward', 'move backward', 'pan left', 'pan right', 'move up', 'move down', 'roll left', 'roll right'];
+                    const commands = ['move forward', 'move backward', 'pan left', 'pan right', 'move up', 'move down', 'roll left', 'roll right', 'video on', 'video off', 'record on', 'record off'];
                     if (commands.includes(transcript)) {
                         appendCommand(transcript.charAt(0).toUpperCase() + transcript.slice(1));
                         sendUdpCommand(transcript);
@@ -189,10 +190,12 @@
                 if (this.classList.contains('record-on')) {
                     this.style.backgroundColor = 'red';
                     appendCommand('Record On');
+                    sendUdpCommand('Record On');
                     if (recognition) recognition.start();
                 } else {
                     this.style.backgroundColor = 'grey';
                     appendCommand('Record Off');
+                    sendUdpCommand('Record Off');
                     if (recognition) recognition.stop();
                 }
             });
@@ -202,9 +205,11 @@
                 if (this.classList.contains('stream-on')) {
                     this.style.backgroundColor = 'blue';
                     appendCommand('Video On');
+                    sendUdpCommand('Video On');
                 } else {
                     this.style.backgroundColor = 'grey';
                     appendCommand('Video Off');
+                    sendUdpCommand('Video Off');
                 }
             });
 
@@ -230,34 +235,153 @@
         const recordButton = document.getElementById('record-button');
         const streamToggle = document.getElementById('stream-toggle');
         const commandInput = document.getElementById('command-input');
-
         let lastCommand = '';
         let commandTimeout;
-        let peerConnection;
-        let dataChannel;
+        const udpPort = 41234;
 
-        // Initialize WebRTC connection
-        async function initializeWebRTC() {
-            const configuration = {
-                iceServers: [
-                    { urls: 'stun:stun.l.google.com:19302' }
-                ]
-            };
-            peerConnection = new RTCPeerConnection(configuration);
+        function encryptMessage(message, key) {
+            const iv = CryptoJS.lib.WordArray.random(16);
+            const encrypted = CryptoJS.AES.encrypt(message, key, { iv: iv });
+            return iv.concat(encrypted.ciphertext).toString(CryptoJS.enc.Base64);
+        }
 
-            dataChannel = peerConnection.createDataChannel("commandChannel");
-            dataChannel.onopen = () => {
-                console.log("Data channel is open");
+        function hmacHash(message, key) {
+            return CryptoJS.HmacSHA256(message, key).toString();
+        }
+
+        function sendUdpCommand(command) {
+            const key = CryptoJS.enc.Hex.parse('your-secure-key-here');
+            const timestamp = Date.now().toString();
+            const nonce = CryptoJS.lib.WordArray.random(16).toString();
+            const message = `${command}|${timestamp}|${nonce}`;
+            const encryptedMessage = encryptMessage(message, key);
+            const hash = hmacHash(encryptedMessage, key);
+            const udpMessage = `${encryptedMessage}|${hash}`;
+
+            const socket = new WebSocket(`ws://localhost:${udpPort}`);
+            socket.onopen = () => {
+                socket.send(udpMessage);
+                socket.close();
             };
-            dataChannel.onclose = () => {
-                console.log("Data channel is closed");
+            socket.onerror = (error) => {
+                console.error('WebSocket error:', error);
+            };
+        }
+
+        // Initialize the joysticks using nipplejs
+        const leftJoystick = nipplejs.create({
+            zone: document.getElementById('left-joystick'),
+            mode: 'static',
+            position: { left: '50%', top: '50%' },
+            color: 'red'
+        });
+
+        const rightJoystick = nipplejs.create({
+            zone: document.getElementById('right-joystick'),
+            mode: 'static',
+            position: { left: '50%', top: '50%' },
+            color: 'blue'
+        });
+
+        leftJoystick.on('move', (evt, data) => {
+            processJoystickCommand('left', data);
+        });
+
+        rightJoystick.on('move', (evt, data) => {
+            processJoystickCommand('right', data);
+        });
+
+        function startVideoStream() {
+            const streamUrl = 'http://drone-video-stream-url';
+            video.src = streamUrl;
+
+            video.onerror = () => {
+                noSignal.style.display = 'block';
             };
 
-            peerConnection.onicecandidate = (event) => {
-                if (event.candidate) {
-                    // Send the ICE candidate to the other peer (not implemented in this example)
+            video.onplay = () => {
+                noSignal.style.display = 'none';
+            };
+        }
+
+        function processJoystickCommand(joystick, data) {
+            let commandString = '';
+
+            if (joystick === 'left') {
+                if (data.angle.degree > 45 && data.angle.degree <= 135) {
+                    commandString = 'Move Up';
+                } else if (data.angle.degree > 135 && data.angle.degree <= 225) {
+                    commandString = 'Pan Left';
+                } else if (data.angle.degree > 225 && data.angle.degree <= 315) {
+                    commandString = 'Move Down';
+                } else {
+                    commandString = 'Pan Right';
                 }
-            };
+            } else if (joystick === 'right') {
+                if (data.angle.degree > 45 && data.angle.degree <= 135) {
+                    commandString = 'Move Forward';
+                } else if (data.angle.degree > 135 && data.angle.degree <= 225) {
+                    commandString = 'Roll Left';
+                } else if (data.angle.degree > 225 && data.angle.degree <= 315) {
+                    commandString = 'Move Backward';
+                } else {
+                    commandString = 'Roll Right';
+                }
+            }
 
-            const offer = await peerConnection.createOffer();
-            await peerConnection.setLocal
+            if (commandString !== lastCommand) {
+                lastCommand = commandString;
+                appendCommand(commandString);
+                sendUdpCommand(commandString);
+            }
+
+            // Clear previous timeout and set a new one to reset the lastCommand after a delay
+            clearTimeout(commandTimeout);
+            commandTimeout = setTimeout(() => {
+                lastCommand = '';
+            }, 500); // Adjust the delay as needed
+        }
+
+        function appendCommand(command) {
+            commandInput.value += command + '     \n'; // Add 5 spaces between each command
+            commandInput.scrollTop = commandInput.scrollHeight; // Scroll to the bottom
+        }
+        
+        recordButton.addEventListener('click', () => {
+            const command = 'TOGGLE_RECORD';
+            sendUdpCommand(command);
+        });
+
+        streamToggle.addEventListener('click', () => {
+            const command = 'TOGGLE_STREAM';
+            sendUdpCommand(command);
+        });
+
+        const crypto = require('crypto');
+
+        const algorithm = 'aes-256-cbc';
+        const secretKey = crypto.randomBytes(32); // Store this securely
+        const iv = crypto.randomBytes(16); // Initialization vector
+
+        function encrypt(text) {
+            const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+            let encrypted = cipher.update(text, 'utf8', 'hex');
+            encrypted += cipher.final('hex');
+            return encrypted;
+        }
+
+        function hmacHash(encryptedMessage) {
+            const hmac = crypto.createHmac('sha256', secretKey);
+            hmac.update(encryptedMessage);
+            return hmac.digest('hex');
+        }
+
+        function getNonce() {
+            return crypto.randomBytes(16).toString('hex');
+        }
+
+        // Start the video stream on page load
+        startVideoStream();
+    </script>   
+</body>
+</html>
