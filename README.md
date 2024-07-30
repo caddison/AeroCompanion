@@ -1,6 +1,6 @@
 # Aero Companion
 
-Welcome to the repository for **Aero Companion**! This project aims to develop a fully autonomous drone equipped with advanced features such as real-time video streaming, computer vision, obstacle avoidance, and AI-driven navigation. Below is a detailed overview of the project, its components, and functionalities.
+Welcome to the repository for [**Aero Companion**!](https://github.com/caddison/AeroCompanion/wiki) This project aims to develop a fully autonomous drone equipped with advanced features such as real-time video streaming, computer vision, obstacle avoidance, and AI-driven navigation. Below is a detailed overview of the project, its components, and functionalities.
 
 ---
 
