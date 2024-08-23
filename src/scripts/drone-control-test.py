@@ -1,7 +1,7 @@
 import socket
-from dronekit import connect, VehicleMode
+from dronekit import connect
 
-# Connect to the drone (you may need to change the connection string)
+# Connect to the drone 
 vehicle = connect('/dev/ttyACM0', baud=115200, wait_ready=True)
 
 # Function to interpret commands and control the drone
@@ -27,12 +27,24 @@ def handle_command(command):
 
 # Set up UDP server to listen for commands from Node.js
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind(('localhost', 14551))
 
-print("Listening for commands on port 14551...")
+try:
+    # Bind to all network interfaces
+    sock.bind(('0.0.0.0', 14551))
+    print("Listening for commands on port 14551...")
+except socket.error as e:
+    print(f"Socket error: {e}")
+    sock.close()
+    exit(1)
 
 while True:
-    data, addr = sock.recvfrom(1024)  # Buffer size is 1024 bytes
-    command = data.decode('utf-8')
-    print(f"Received command: {command}")
-    handle_command(command)
+    try:
+        data, addr = sock.recvfrom(1024)  # Buffer size is 1024 bytes
+        if data:
+            command = data.decode('utf-8')
+            print(f"Received command from {addr}: {command}")
+            handle_command(command)
+        else:
+            print(f"Received empty data from {addr}")
+    except socket.error as e:
+        print(f"Socket error while receiving data: {e}")
