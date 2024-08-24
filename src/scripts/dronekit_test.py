@@ -1,4 +1,3 @@
-# vehicle_connect.py
 from dronekit import connect
 
 # Global variable to store the vehicle instance
