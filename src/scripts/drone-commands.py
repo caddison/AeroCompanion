@@ -1,5 +1,5 @@
-# drone_commands.py
 from vehicle_connect import vehicle
+from dronekit import VehicleMode
 
 def move_drone(command: str):
     if vehicle is None:
@@ -7,9 +7,9 @@ def move_drone(command: str):
         return
     
     if command == 'Move Up':
-        vehicle.simple_takeoff(vehicle.location.global_relative_frame.alt + 1)
+        move_up(vehicle)
     elif command == 'Move Down':
-        vehicle.simple_takeoff(vehicle.location.global_relative_frame.alt - 1)
+        move_down(vehicle)
     elif command == 'Move Forward':
         move_forward(vehicle)
     elif command == 'Move Backward':
@@ -22,6 +22,16 @@ def move_drone(command: str):
         roll_left(vehicle)
     elif command == 'Roll Right':
         roll_right(vehicle)
+
+def move_up(vehicle):
+    # Increase altitude by 1 meter
+    new_altitude = vehicle.location.global_relative_frame.alt + 1
+    vehicle.simple_goto(vehicle.location.global_relative_frame.lat, vehicle.location.global_relative_frame.lon, new_altitude)
+
+def move_down(vehicle):
+    # Decrease altitude by 1 meter, ensuring it doesn't go below 0
+    new_altitude = max(0, vehicle.location.global_relative_frame.alt - 1)
+    vehicle.simple_goto(vehicle.location.global_relative_frame.lat, vehicle.location.global_relative_frame.lon, new_altitude)
 
 def move_forward(vehicle):
     vehicle.channels.overrides['2'] = 1600  # Pitch forward
