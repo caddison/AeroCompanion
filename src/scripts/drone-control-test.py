@@ -4,12 +4,8 @@ from Crypto.Cipher import AES
 from Crypto.Hash import HMAC, SHA256
 from Crypto.Util.Padding import unpad
 
-# Secure key (replace this with the actual key used in your JavaScript code)
-secure_key = "key"  # Original key
-
-# Derive a 256-bit key (32 bytes) using SHA-256
-hash_object = SHA256.new(data=secure_key.encode('utf-8'))
-key = hash_object.digest()  # This gives a 32-byte key
+# Use the temporary key "key"
+secure_key = "key"
 
 def decrypt_message(encrypted_message_with_hmac, key):
     try:
@@ -28,7 +24,7 @@ def decrypt_message(encrypted_message_with_hmac, key):
         print(f"Ciphertext: {ciphertext.hex()}")
 
         # Verify HMAC
-        hmac = HMAC.new(key, msg=encrypted_message_bytes, digestmod=SHA256)
+        hmac = HMAC.new(key.encode('utf-8'), msg=encrypted_message_bytes, digestmod=SHA256)
         calculated_hmac = hmac.hexdigest()
 
         if calculated_hmac != received_hmac:
@@ -37,7 +33,7 @@ def decrypt_message(encrypted_message_with_hmac, key):
             raise ValueError("HMAC verification failed.")
 
         # Create the cipher object and decrypt the data
-        cipher = AES.new(key, AES.MODE_CBC, iv)
+        cipher = AES.new(key.encode('utf-8'), AES.MODE_CBC, iv)
         decrypted_message = unpad(cipher.decrypt(ciphertext), AES.block_size).decode('utf-8')
 
         return decrypted_message
@@ -60,7 +56,7 @@ if __name__ == "__main__":
 
     try:
         # Decrypt the received message
-        decrypted_command = decrypt_message(encrypted_command_with_hmac, key)
+        decrypted_command = decrypt_message(encrypted_command_with_hmac, secure_key)
         handle_command(decrypted_command)
     except ValueError as e:
         print(f"Decryption failed: {e}")
