@@ -24,36 +24,43 @@ def move_drone(command: str):
         roll_right(vehicle)
 
 def move_up(vehicle):
-    # Increase altitude by 1 meter
     new_altitude = vehicle.location.global_relative_frame.alt + 1
     vehicle.simple_goto(vehicle.location.global_relative_frame.lat, vehicle.location.global_relative_frame.lon, new_altitude)
+    print(f"Executing command: Move Up. New altitude: {new_altitude} meters")
 
 def move_down(vehicle):
-    # Decrease altitude by 1 meter, ensuring it doesn't go below 0
     new_altitude = max(0, vehicle.location.global_relative_frame.alt - 1)
     vehicle.simple_goto(vehicle.location.global_relative_frame.lat, vehicle.location.global_relative_frame.lon, new_altitude)
+    print(f"Executing command: Move Down. New altitude: {new_altitude} meters")
 
 def move_forward(vehicle):
     vehicle.channels.overrides['2'] = 1600  # Pitch forward
+    print("Executing command: Move Forward")
 
 def move_backward(vehicle):
     vehicle.channels.overrides['2'] = 1400  # Pitch backward
+    print("Executing command: Move Backward")
 
 def pan_left(vehicle):
     vehicle.channels.overrides['4'] = 1400  # Yaw left
+    print("Executing command: Pan Left")
 
 def pan_right(vehicle):
     vehicle.channels.overrides['4'] = 1600  # Yaw right
+    print("Executing command: Pan Right")
 
 def roll_left(vehicle):
     vehicle.channels.overrides['1'] = 1400  # Roll left
+    print("Executing command: Roll Left")
 
 def roll_right(vehicle):
     vehicle.channels.overrides['1'] = 1600  # Roll right
+    print("Executing command: Roll Right")
 
 def reset_overrides():
     if vehicle is not None:
         vehicle.channels.overrides = {}
+    print("Resetting channel overrides")
 
 def execute_command(command: str):
     move_drone(command)
