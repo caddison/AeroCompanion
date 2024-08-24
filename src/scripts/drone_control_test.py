@@ -3,7 +3,7 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Hash import HMAC, SHA256
 from Crypto.Util.Padding import unpad
-from drone-commands import execute_command  # Import the command execution function
+from drone_commands import execute_command  # Import the command execution function
 
 # Use the temporary key "key" and hash it to 32 bytes
 secure_key = "key"
