@@ -5,6 +5,22 @@ import time
 print("Connecting to drone...", flush=True)
 vehicle = connect('/dev/ttyACM0', baud=115200, wait_ready=True)
 
+# Function to arm the drone
+def arm_drone():
+    while not vehicle.is_armable:
+        print("Waiting for vehicle to become armable...", flush=True)
+        time.sleep(1)
+
+    print("Arming the drone...", flush=True)
+    vehicle.mode = VehicleMode("STABILIZE")
+    vehicle.armed = True
+
+    while not vehicle.armed:
+        print("Waiting for drone to arm...", flush=True)
+        time.sleep(1)
+
+    print("Drone is armed!", flush=True)
+
 # Function to monitor and output the drone's status to the console
 def monitor_drone():
     try:
@@ -45,5 +61,6 @@ def monitor_drone():
         print("Closing connection...", flush=True)
         vehicle.close()
 
-# Run the monitor function
+# Run the arm and monitor functions
+arm_drone()
 monitor_drone()
