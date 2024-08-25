@@ -3,7 +3,7 @@ import base64
 from Crypto.Cipher import AES
 from Crypto.Hash import HMAC, SHA256
 from Crypto.Util.Padding import unpad
-from drone_commands import execute_command  # Import the command execution function
+from drone_commands import execute_command
 
 # Use the temporary key "key" and hash it to 32 bytes
 secure_key = "key"
@@ -45,11 +45,10 @@ def decrypt_message(encrypted_message_with_hmac, key):
         raise ValueError(f"Decryption failed: {ve}")
     except Exception as e:
         raise ValueError(f"Unexpected error during decryption: {e}")
-
 # Function to execute the drone command
 def handle_command(command):
     print(f"Command received: {command}")
-    
+
     # Mapping of the decrypted command to drone functions
     command_mapping = {
         'Move Up': 'Move Up',
@@ -59,7 +58,11 @@ def handle_command(command):
         'Pan Left': 'Pan Left',
         'Pan Right': 'Pan Right',
         'Roll Left': 'Roll Left',
-        'Roll Right': 'Roll Right'
+        'Roll Right': 'Roll Right',
+        'Video Stream On': 'Video Stream On',
+        'Video Stream Off': 'Video Stream Off',
+        'Voice Record On': 'Voice Record On',
+        'Voice Record Off': 'Voice Record Off'
     }
 
     # Execute the command if it exists in the mapping
