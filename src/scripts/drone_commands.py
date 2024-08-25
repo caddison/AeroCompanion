@@ -1,5 +1,5 @@
 import time
-from vehicle_connect import vehicle
+from drone_connect_test import vehicle
 from dronekit import VehicleMode
 
 # Global variables to store the last command time and last command received
