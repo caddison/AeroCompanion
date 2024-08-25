@@ -1,61 +1,63 @@
+import time
 from vehicle_connect import vehicle
 from dronekit import VehicleMode
 
+# Global variables to store the last command time and last command received
+last_command_time = 0
+command_interval = 0.5  # Interval in seconds between command executions
+last_command = None
+
 def move_drone(command: str):
+    global last_command_time, last_command
+
     if vehicle is None:
         print("Vehicle not connected")
         return
     
+    current_time = time.time()
+    
+    # Check if the command is the same as the last command and if the interval has passed
+    if command == last_command and (current_time - last_command_time) < command_interval:
+        print(f"Ignoring command {command} due to debounce interval.")
+        return
+    
+    # Update the last command time and last command
+    last_command_time = current_time
+    last_command = command
+    
+    # Execute the corresponding movement command
     if command == 'Move Up':
-        move_up(vehicle)
+        gradual_move(vehicle, '3', 1600)  # Throttle up
     elif command == 'Move Down':
-        move_down(vehicle)
+        gradual_move(vehicle, '3', 1400)  # Throttle down
     elif command == 'Move Forward':
-        move_forward(vehicle)
+        gradual_move(vehicle, '2', 1600)  # Pitch forward
     elif command == 'Move Backward':
-        move_backward(vehicle)
+        gradual_move(vehicle, '2', 1400)  # Pitch backward
     elif command == 'Pan Left':
-        pan_left(vehicle)
+        gradual_move(vehicle, '4', 1400)  # Yaw left
     elif command == 'Pan Right':
-        pan_right(vehicle)
+        gradual_move(vehicle, '4', 1600)  # Yaw right
     elif command == 'Roll Left':
-        roll_left(vehicle)
+        gradual_move(vehicle, '1', 1400)  # Roll left
     elif command == 'Roll Right':
-        roll_right(vehicle)
+        gradual_move(vehicle, '1', 1600)  # Roll right
 
-def move_up(vehicle):
-    new_altitude = vehicle.location.global_relative_frame.alt + 1
-    vehicle.simple_goto(vehicle.location.global_relative_frame.lat, vehicle.location.global_relative_frame.lon, new_altitude)
-    print(f"Executing command: Move Up. New altitude: {new_altitude} meters")
+def gradual_move(vehicle, channel, target_pwm, step=10, delay=0.05):
+    """Gradually move the drone by adjusting the PWM value in steps."""
+    current_pwm = vehicle.channels[channel]
+    
+    while current_pwm != target_pwm:
+        if target_pwm > current_pwm:
+            current_pwm = min(target_pwm, current_pwm + step)
+        else:
+            current_pwm = max(target_pwm, current_pwm - step)
+        
+        vehicle.channels.overrides[channel] = current_pwm
+        print(f"Moving on channel {channel} to PWM: {current_pwm}")
+        time.sleep(delay)
 
-def move_down(vehicle):
-    new_altitude = max(0, vehicle.location.global_relative_frame.alt - 1)
-    vehicle.simple_goto(vehicle.location.global_relative_frame.lat, vehicle.location.global_relative_frame.lon, new_altitude)
-    print(f"Executing command: Move Down. New altitude: {new_altitude} meters")
-
-def move_forward(vehicle):
-    vehicle.channels.overrides['2'] = 1600  # Pitch forward
-    print("Executing command: Move Forward")
-
-def move_backward(vehicle):
-    vehicle.channels.overrides['2'] = 1400  # Pitch backward
-    print("Executing command: Move Backward")
-
-def pan_left(vehicle):
-    vehicle.channels.overrides['4'] = 1400  # Yaw left
-    print("Executing command: Pan Left")
-
-def pan_right(vehicle):
-    vehicle.channels.overrides['4'] = 1600  # Yaw right
-    print("Executing command: Pan Right")
-
-def roll_left(vehicle):
-    vehicle.channels.overrides['1'] = 1400  # Roll left
-    print("Executing command: Roll Left")
-
-def roll_right(vehicle):
-    vehicle.channels.overrides['1'] = 1600  # Roll right
-    print("Executing command: Roll Right")
+    print(f"Target PWM {target_pwm} reached on channel {channel}")
 
 def reset_overrides():
     if vehicle is not None:
