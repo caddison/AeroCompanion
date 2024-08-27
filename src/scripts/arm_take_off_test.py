@@ -26,7 +26,9 @@ def arm_and_takeoff_nogps(target_altitude):
     vehicle.mode = VehicleMode("ALT_HOLD")
     
     while True:
-        current_altitude = vehicle.rangefinder.distance
+        current_altitude = vehicle.location.global_relative_frame.alt
+        print(f"Current altitude: {current_altitude} meters")
+        
         if current_altitude >= target_altitude * 0.95:
             print(f"Reached target altitude: {current_altitude} meters")
             break
