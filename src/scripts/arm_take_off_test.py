@@ -2,7 +2,7 @@ from dronekit import connect, VehicleMode, LocationGlobalRelative
 import time
 
 # Connect to the Pixhawk
-vehicle = connect('/dev/serial0', wait_ready=True, baud=921600)
+vehicle = connect('/dev/ttyACM0', wait_ready=True, baud=921600)
 
 def arm_and_takeoff_nogps(target_altitude):
     """
