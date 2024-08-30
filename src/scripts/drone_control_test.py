@@ -45,6 +45,7 @@ def decrypt_message(encrypted_message_with_hmac, key):
         raise ValueError(f"Decryption failed: {ve}")
     except Exception as e:
         raise ValueError(f"Unexpected error during decryption: {e}")
+
 # Function to execute the drone command
 def handle_command(command):
     print(f"Command received: {command}")
@@ -62,7 +63,8 @@ def handle_command(command):
         'Video Stream On': 'Video Stream On',
         'Video Stream Off': 'Video Stream Off',
         'Voice Record On': 'Voice Record On',
-        'Voice Record Off': 'Voice Record Off'
+        'Voice Record Off': 'Voice Record Off',
+        'Land': 'Land'  
     }
 
     # Execute the command if it exists in the mapping
