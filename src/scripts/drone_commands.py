@@ -42,6 +42,8 @@ def move_drone(command: str):
         gradual_move(vehicle, '1', 1400)  # Roll left
     elif command == 'Roll Right':
         gradual_move(vehicle, '1', 1600)  # Roll right
+    elif command == 'Land':
+        land_drone()  # Initiate landing sequence
 
 def gradual_move(vehicle, channel, target_pwm, step=10, delay=0.05):
     """Gradually move the drone by adjusting the PWM value in steps."""
@@ -58,6 +60,15 @@ def gradual_move(vehicle, channel, target_pwm, step=10, delay=0.05):
         time.sleep(delay)
 
     print(f"Target PWM {target_pwm} reached on channel {channel}")
+
+def land_drone():
+    """Initiate the landing sequence."""
+    print("Landing initiated")
+    vehicle.mode = VehicleMode("LAND")
+    while vehicle.armed:
+        print("Waiting for the drone to land...")
+        time.sleep(1)
+    print("Drone has landed and disarmed.")
 
 def reset_overrides():
     if vehicle is not None:
