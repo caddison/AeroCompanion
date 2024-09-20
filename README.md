@@ -54,11 +54,44 @@ The drone operates using a combination of IMU data, computer vision, and AI algo
 
 ---
 
-## Future Enhancements
+## Useful Commands
+These commands are designed for a wide range of commercial applications and allow users to utilize the drone for tasks such as inspection, delivery, and surveillance in various industries:
 
-- **Swarm Intelligence**: Coordination between multiple drones for advanced missions.
-- **Automatic Retraining**: Users can issue a "train" command to process saved telemetry and command data, updating the AI model to improve drone control and performance after each session.
-- **Payload Delivery**: Precision payload delivery using computer vision and modular payload systems.
+**Move Up / Move Down**: Vertical navigation for getting the drone to the required altitude.
+
+**Pan Left / Pan Right**: Adjust the drone’s orientation for full 360-degree coverage.
+
+**Move Forward / Move Backward**: Basic forward or backward movement for navigating environments.
+
+**Rotate Left / Rotate Right**: Rotate the drone to adjust the camera or sensors without changing position.
+
+**Hover**: Stabilize the drone in one place for a detailed inspection or data capture.
+
+**Track Object**: Automatically follow a moving object, such as a person or vehicle, based on real-time visual data.
+
+**Follow Route**: Pre-program a route using GPS for the drone to follow autonomously.
+
+**Survey Area**: Perform a comprehensive aerial survey, capturing images or video over a specified area.
+
+**Inspect Structure**: Use the drone to fly close to buildings or infrastructure for inspections, such as roofs or tall structures.
+
+**Scan Environment**: Utilize LiDAR and visual sensors to create a 3D model of the surrounding area for mapping or analysis.
+
+**Search and Locate**: Activate a search mode to find and track specific objects or people, useful for search and rescue operations.
+
+**Deliver Package**: Navigate to a specific location and release a payload (e.g., for delivery services or supply drops).
+
+**Return to Home**: Command the drone to return to its starting point automatically.
+
+**Avoid Obstacles**: Enable obstacle detection and avoidance to navigate safely in complex environments.
+
+**Capture Data**: Record visual, thermal, or sensor data for later analysis or real-time transmission to the user.
+
+**Patrol Area**: Perform repeated loops around a specified area, monitoring for changes or abnormalities.
+
+**Thermal Scan**: Use thermal imaging to detect heat signatures, useful for energy audits or finding missing persons.
+
+**Precise Landing**: Utilize sensors to guide the drone to a safe and accurate landing position.
 
 ---
 
