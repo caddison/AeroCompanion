@@ -68,7 +68,6 @@ This section provides a detailed market analysis of similar drones, highlighting
   - Affordable price.
   - Excellent obstacle avoidance.
 - **Disadvantages:**
-  - Shorter flight time.
   - Less modularity.
   - No cellular connectivity.
   - Limited to GPS navigation.
