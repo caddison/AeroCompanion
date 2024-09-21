@@ -188,7 +188,7 @@ This section provides a detailed market analysis of similar drones, highlighting
 - **Mid-Range Professional Drones:** $2,000 - $7,000 USD.
 - **High-End Professional Drones:** $7,000 - $20,000+ USD.
 
-**Suggested Price Range for AeroCompanion:** **$3,000 - $5,000 USD**
+**Suggested Price Range for AeroCompanion:** **$3,000 - $10,000 USD**
 
 This pricing reflects the advanced features of AeroCompanion while remaining competitive against higher-priced models.
 
