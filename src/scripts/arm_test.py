@@ -33,8 +33,7 @@ def disable_all_checks(vehicle):
 
 def main():
     # List of potential serial devices
-    devices = ['/dev/ttyACM0', '/dev/ttyACM1', '/d:wq
-iuuuuu:qfev/ttyUSB0', '/dev/ttyUSB1', '/dev/ttyUSB2', '/dev/ttyUSB3']
+    devices = ['/dev/ttyACM0', '/dev/ttyACM1', '/dev/ttyUSB0', '/dev/ttyUSB1', '/dev/ttyUSB2', '/dev/ttyUSB3']
 
     vehicle = None
     for device in devices:
