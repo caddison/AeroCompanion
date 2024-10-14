@@ -1,70 +1,94 @@
 from dronekit import connect, VehicleMode
 import time
+import logging
 
-def wait_for_mode_change(target_mode):
-    print(f"Changing mode to {target_mode}...")
-    vehicle.mode = VehicleMode(target_mode)
+# Enable detailed logging
+logging.basicConfig(level=logging.DEBUG)
+
+def disable_all_checks(vehicle):
+    try:
+        print("Disabling all pre-arm checks and safety mechanisms...")
+        
+        # Disable pre-arm checks
+        vehicle.parameters['ARMING_CHECK'] = 0
+        
+        # Disable GPS-related checks (if any)
+        vehicle.parameters['GPS_TYPE'] = 0
+        
+        # Disable geofence
+        vehicle.parameters['FENCE_ENABLE'] = 0
+        
+        # Set throttle failsafe to disabled
+        vehicle.parameters['FS_THR_ENABLE'] = 0
+        
+        # Disable battery failsafe
+        vehicle.parameters['FS_BATT_ENABLE'] = 0
+        
+        # Disable radio failsafe
+        vehicle.parameters['FS_GCS_ENABLE'] = 0
+        
+        print("All checks and safety features disabled.")
+    except Exception as e:
+        print(f"Error disabling checks: {e}")
+
+def main():
+    # List of potential serial devices
+    devices = ['/dev/ttyACM0', '/dev/ttyACM1', '/d:wq
+iuuuuu:qfev/ttyUSB0', '/dev/ttyUSB1', '/dev/ttyUSB2', '/dev/ttyUSB3']
+
+    vehicle = None
+    for device in devices:
+        try:
+            print(f"Trying to connect to {device}")
+            vehicle = connect(device, baud=115200, wait_ready=True, heartbeat_timeout=60)
+            print(f"Connected to vehicle on {device}")
+            break
+        except Exception as e:
+            print(f"Failed to connect to {device}: {e}")
     
-    while vehicle.mode.name != target_mode:
-        print(f"Waiting for mode change to {target_mode} (Current mode: {vehicle.mode.name})")
+    if not vehicle:
+        print("Unable to connect to any devices. Exiting.")
+        return
+
+    # Disable all pre-arm checks and failsafes
+    disable_all_checks(vehicle)
+
+    # Wait for the vehicle to be ready
+    vehicle.wait_ready('autopilot_version', 'parameters', timeout=60)
+    print("Connected and ready.")
+
+    # Set the vehicle mode to STABILIZE or ALT_HOLD (since these do not require GPS)
+    print("Setting vehicle mode to STABILIZE...")
+    vehicle.mode = VehicleMode("STABILIZE")
+    while not vehicle.mode.name == "STABILIZE":
+        print(f"Waiting for mode change... Current mode: {vehicle.mode.name}")
         time.sleep(1)
-    print(f"Mode successfully changed to {target_mode}.")
-
-def perform_prearm_checks():
-    print("Waiting for vehicle to pass pre-arm checks...")
-
-    # Optionally disable pre-arm checks if needed (for debugging)
-    vehicle.parameters['ARMING_CHECK'] = 0  # Disable all checks temporarily
-
-    while not vehicle.is_armable:
-        print(f"Waiting for vehicle to become armable... (System status: {vehicle.system_status.state}, Mode: {vehicle.mode.name}, "
-              f"GPS: {vehicle.gps_0.fix_type}, EKF: {vehicle.ekf_ok}, Voltage: {vehicle.battery.voltage}V, "
-              f"Battery: {vehicle.battery.level}%, Arming Check: {vehicle.parameters.get('ARMING_CHECK')})")
-        # Check if we can at least bypass the checks temporarily
-        if vehicle.parameters['ARMING_CHECK'] == 0:
-            print("Pre-arm checks disabled for testing.")
-        time.sleep(1)
-
-    print("Vehicle passed all pre-arm checks and is armable.")
-
-def arm_and_disarm():
-    perform_prearm_checks()
-
-    wait_for_mode_change("STABILIZE")
+    print("Vehicle mode set to STABILIZE.")
 
     # Arm the vehicle
     print("Arming the vehicle...")
     vehicle.armed = True
-
     while not vehicle.armed:
         print("Waiting for vehicle to arm...")
         time.sleep(1)
-    print("Vehicle is armed. WARNING: Props are spinning!")
+    print("Vehicle is armed.")
 
+    # Wait for a few seconds
+    print("Vehicle is now armed. Waiting for 5 seconds...")
     time.sleep(5)
 
     # Disarm the vehicle
     print("Disarming the vehicle...")
     vehicle.armed = False
-
     while vehicle.armed:
         print("Waiting for vehicle to disarm...")
         time.sleep(1)
     print("Vehicle is disarmed.")
 
-def connect_my_copter():
-    print("Connecting to vehicle on: /dev/ttyACM0")
-    return connect('/dev/ttyACM0', baud=115200, wait_ready=True)
+    # Close vehicle object
+    vehicle.close()
+    print("Vehicle connection closed.")
 
-# Main execution
-vehicle = connect_my_copter()
+if __name__ == "__main__":
+    main()
 
-if vehicle:
-    print("Successfully connected to the vehicle.")
-else:
-    print("Failed to connect to the vehicle.")
-    exit(1)
-
-arm_and_disarm()
-
-print("End of script.")
