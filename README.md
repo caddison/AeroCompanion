@@ -81,7 +81,7 @@ These commands are designed for a wide range of commercial applications and allo
 
 **Deliver Package**: Navigate to a specific location and release a payload (e.g., for delivery services or supply drops).
 
-**Return to Home**: Command the drone to return to its controller automatically.
+**Return to Home**: Command the drone to return to its launch point.
 
 **Capture Data**: Record visual, thermal, or sensor data for later analysis or real-time transmission to the user.
 
