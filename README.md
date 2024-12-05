@@ -1,6 +1,6 @@
 # Aero Companion
 
-Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/AeroCompanion/wiki) This project aims to develop a fully autonomous drone equipped with advanced features such as real-time video streaming, computer vision, obstacle avoidance, and AI-driven navigation. Below is a detailed overview of the project, its components, and functionalities.
+Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/AeroCompanion/wiki) This project aims to develop an autonomous drone equipped with advanced features such as real-time video streaming, computer vision, obstacle avoidance, and AI-driven navigation. Below is a detailed overview of the project, its components, and functionalities.
 
 ---
 
@@ -14,7 +14,7 @@ This project leverages the powerful capabilities of the Raspberry Pi 5 and Pixha
 
 ### Autonomous Flight Control
 - Utilizes the **Pixhawk 6X** flight controller for precise and reliable flight control.
-- Implements advanced AI models developed in Python to handle autonomous navigation and decision-making.
+- Implements AI models developed in Python to handle autonomous navigation and decision-making.
 
 ### Real-Time Video Streaming
 - Streams live video feed from the drone's 12MP camera to a web application or **Vuzix Blade** smart glasses for FPV (First Person View) experience.
@@ -22,7 +22,7 @@ This project leverages the powerful capabilities of the Raspberry Pi 5 and Pixha
 
 ### Computer Vision and Obstacle Avoidance
 - Employs a secondary downward-facing camera for movement tracking and obstacle detection.
-- Integrates computer vision algorithms for target tracking, obstacle avoidance, and payload delivery precision.
+- Integrates computer vision algorithms for target tracking, obstacle avoidance, and payload delivery.
 
 ### GPS-Free Navigation
 - Relies on IMU data and visual tracking for navigation, ensuring continued operation even in GPS-denied environments.
