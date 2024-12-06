@@ -73,10 +73,6 @@ These commands are designed for a wide range of commercial applications and allo
 
 **Survey Area**: Perform a comprehensive aerial survey, capturing images or video over a specified area.
 
-**Inspect Structure**: Use the drone to fly close to buildings or infrastructure for inspections, such as roofs or tall structures.
-
-**Scan Environment**: Utilize LiDAR and visual sensors to create a 3D model of the surrounding area for mapping or analysis.
-
 **Search and Locate**: Activate a search mode to find and track specific objects or people, useful for search and rescue operations.
 
 **Deliver Package**: Navigate to a specific location and release a payload (e.g., for delivery services or supply drops).
@@ -84,12 +80,6 @@ These commands are designed for a wide range of commercial applications and allo
 **Return to Home**: Command the drone to return to its launch point.
 
 **Capture Data**: Record visual, thermal, or sensor data for later analysis or real-time transmission to the user.
-
-**Patrol Area**: Perform repeated loops around a specified area, monitoring for changes or abnormalities.
-
-**Thermal Scan**: Use thermal imaging to detect heat signatures, useful for energy audits or finding missing persons.
-
-**Precise Landing**: Utilize sensors to guide the drone to a safe and accurate landing position.
 
 ---
 
