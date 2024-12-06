@@ -1,12 +1,12 @@
 # Aero Companion
 
-Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/AeroCompanion/wiki) This project aims to develop an autonomous drone equipped with advanced features such as real-time video streaming, computer vision, obstacle avoidance, and AI-driven navigation. Below is a detailed overview of the project, its components, and functionalities.
+Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/AeroCompanion/wiki) This project aims to develop an autonomous drone equipped with advanced features such as real-time video streaming, computer vision, and GPS independent navigation. Below is a detailed overview of the project, its components, and functionalities.
 
 ---
 
 ## Project Overview
 
-This project leverages the powerful capabilities of the Raspberry Pi 5 and Pixhawk 6X flight controller to create a cutting-edge drone capable of executing complex autonomous tasks. The drone is designed to operate without GPS, utilizing IMU data and computer vision for navigation and obstacle avoidance.
+This project leverages the capabilities of the Raspberry Pi 5 and Pixhawk 6X flight controller to create a cutting-edge drone capable of executing complex autonomous tasks. The drone is designed to operate without GPS, utilizing IMU data and computer vision for navigation.
 
 ---
 
@@ -18,7 +18,7 @@ This project leverages the powerful capabilities of the Raspberry Pi 5 and Pixha
 
 ### Real-Time Video Streaming
 - Streams live video feed from the drone's 12MP camera to a web application or **Vuzix Blade** smart glasses for FPV (First Person View) experience.
-- Provides seamless video transmission over a **Sixfab 4G/LTE cellular modem** for extended range operations.
+- Provides video transmission over a **Sixfab 4G/LTE cellular modem** for extended range operations.
 
 ### Computer Vision and Obstacle Avoidance
 - Employs a secondary downward-facing camera for movement tracking and obstacle detection.
@@ -67,15 +67,11 @@ These commands are designed for a wide range of commercial applications and allo
 
 **Hover**: Stabilize the drone in one place for a detailed inspection or data capture.
 
-**Track Object**: Automatically follow a moving object, such as a person or vehicle, based on real-time visual data.
+**Track**: Automatically follow a moving object, such as a person or vehicle, based on real-time visual data.
 
 **Follow Route**: Pre-program a route using GPS for the drone to follow autonomously.
 
-**Survey Area**: Perform a comprehensive aerial survey, capturing images or video over a specified area.
-
-**Search and Locate**: Activate a search mode to find and track specific objects or people, useful for search and rescue operations.
-
-**Deliver Package**: Navigate to a specific location and release a payload (e.g., for delivery services or supply drops).
+**Deliver Package**: Navigate to a specific location and release a payload.
 
 **Return to Home**: Command the drone to return to its launch point.
 
