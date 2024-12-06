@@ -63,7 +63,7 @@ These commands are designed for a wide range of commercial applications and allo
 
 **Move Forward / Move Backward**: Basic forward or backward movement for navigating environments.
 
-**Rotate Left / Rotate Right**: Rotate the drone to adjust the camera or sensors without changing position.
+**Move Left / Move Right**: Rotate the drone to adjust the camera or sensors without changing position.
 
 **Hover**: Stabilize the drone in one place for a detailed inspection or data capture.
 
