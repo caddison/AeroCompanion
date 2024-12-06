@@ -75,7 +75,7 @@ These commands are designed for a wide range of commercial applications and allo
 
 **Return to Home**: Command the drone to return to its launch point.
 
-**Capture Data**: Record visual, thermal, or sensor data for later analysis or real-time transmission to the user.
+**Capture Data**: Record visual data for later analysis or real-time transmission to the user.
 
 ---
 
