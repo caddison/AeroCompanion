@@ -41,9 +41,8 @@ This project leverages the capabilities of the Raspberry Pi 5 and Pixhawk 6X fli
 
 - **Flight Controller**: Pixhawk 6X
 - **Processor**: Raspberry Pi 5
-- **Camera**: Raspberry Pi 12MP HQ Camera
+- **Camera**: Raspberry Pi Camera
 - **Connectivity**: Sixfab 4G/LTE Cellular Modem
-- **Power**: Tattu 1050mAh 6S 95C LiPo Battery
 - **Materials**: Lightweight and durable 3D-printed mounts and frames
 
 ![Untitled](https://github.com/user-attachments/assets/dc0594b6-62c0-4686-a3e9-f3ca67912bf2)
