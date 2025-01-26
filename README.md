@@ -46,6 +46,7 @@ This project leverages the capabilities of the Raspberry Pi 5 and Pixhawk 6X fli
 - **Power**: Tattu 1050mAh 6S 95C LiPo Battery
 - **Materials**: Lightweight and durable 3D-printed mounts and frames
 
+![Untitled](https://github.com/user-attachments/assets/dc0594b6-62c0-4686-a3e9-f3ca67912bf2)
 ---
 
 ## How It Works
