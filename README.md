@@ -45,7 +45,6 @@ This project leverages the capabilities of the Raspberry Pi 5 and Pixhawk 6X fli
 - **Connectivity**: Sixfab 4G/LTE Cellular Modem
 - **Materials**: Lightweight and durable 3D-printed mounts and frames
 
-![Untitled](https://github.com/user-attachments/assets/dc0594b6-62c0-4686-a3e9-f3ca67912bf2)
 ---
 
 ## How It Works
