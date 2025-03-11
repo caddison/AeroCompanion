@@ -48,12 +48,6 @@ This project leverages the capabilities of the Raspberry Pi 5 and Pixhawk 6X fli
 
 ---
 
-## How It Works
-
-The drone operates using a combination of IMU data, computer vision, and AI algorithms. The AI model processes real-time telemetry data and user commands, executing complex maneuvers and maintaining stable flight. The drone streams live video to the user's web application or AR smart glasses, providing a real-time FPV experience and enabling remote operation.
-
----
-
 ## Useful Commands
 These commands are designed for a wide range of commercial applications and allow users to utilize the drone for tasks such as inspection, delivery, and surveillance in various industries:
 
@@ -88,7 +82,3 @@ These commands are designed for a wide range of commercial applications and allo
 ![Screenshot by Snip My on Mar 11, 2025 at 6 55 26 PM](https://github.com/user-attachments/assets/cf566c4a-57b7-4643-a2d7-f347da3bb72d)
 
 ![Screenshot by Snip My on Mar 11, 2025 at 6 55 49 PM](https://github.com/user-attachments/assets/53867f50-8075-4b4a-ae29-7ddaee4b8605)
-
-We hope you find this project interesting and look forward to your contributions and feedback!
-
-
