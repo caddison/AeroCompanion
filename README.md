@@ -1,7 +1,6 @@
 # Aero Companion
 
-Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/AeroCompanion/wiki) This project is dedicated to creating an autonomous drone that boasts cutting-edge capabilities including real-time video streaming, computer vision, and GPS-independent navigation. Below you will find an in-depth overview of the project, including its components and functionalities. This software prototype is available for purchase, and we are offering it under a drone software-as-a-service revenue model.
-We are currently seeking a silent investor with an investment capability of $100 million to accelerate the development and scaling of our technology. This partnership is an excellent opportunity to be part of a pioneering venture in the autonomous drone industry.
+Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/AeroCompanion/wiki) This project is dedicated to creating an autonomous drone that boasts cutting-edge capabilities including real-time video streaming, computer vision, and GPS-independent navigation. Below you will find an in-depth overview of the project, including its components and functionalities. 
 
 ![SV-1](https://github.com/user-attachments/assets/793b0359-60e2-421e-9457-8e847ec74d0e)
 
