@@ -2,7 +2,6 @@
 
 Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/AeroCompanion/wiki) This project is dedicated to creating an autonomous drone that boasts cutting-edge capabilities including real-time video streaming, computer vision, and GPS-independent navigation. Below you will find an in-depth overview of the project, including its components and functionalities. 
 
-![SV-1](https://github.com/user-attachments/assets/793b0359-60e2-421e-9457-8e847ec74d0e)
 
 ---
 
