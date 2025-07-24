@@ -85,7 +85,7 @@ These commands are designed for a wide range of commercial applications and allo
 ![Screenshot by Snip My on Mar 11, 2025 at 6 55 49 PM](https://github.com/user-attachments/assets/53867f50-8075-4b4a-ae29-7ddaee4b8605)
 
 
-# 🚁 Autonomous Drone System Architecture
+# Autonomous Drone System Architecture
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green.svg)](https://opencv.org)
@@ -97,7 +97,7 @@ These commands are designed for a wide range of commercial applications and allo
 
 An intelligent drone system that reads mission objectives from USB and executes autonomous operations using computer vision, SLAM navigation, and safety monitoring.
 
-## 🏗️ System Overview
+## System Overview
 
 The architecture consists of **7 independent Python modules** coordinated by a central mission controller:
 
@@ -117,9 +117,9 @@ graph TD
     G --> L[USB Storage]
 ```
 
-## 🧠 Core Modules
+## Core Modules
 
-### 1. 🎯 Mission Controller (Main Brain)
+### 1. Mission Controller (Main Brain)
 
 **Purpose:** Central coordinator that orchestrates all other modules
 
@@ -132,14 +132,14 @@ class MissionController:
 ```
 
 **Key Responsibilities:**
-- 📋 Parse Program Objectives from USB
-- 🔄 Maintain mission state machine
-- 🤝 Coordinate all modules
-- ⚡ **Priority**: Safety > Mission > Efficiency
+- Parse Program Objectives from USB
+- Maintain mission state machine
+- Coordinate all modules
+- **Priority**: Safety > Mission > Efficiency
 
 ---
 
-### 2. ✈️ Flight Interface Module
+### 2. Flight Interface Module
 
 **Purpose:** Handles MAVLink communication with ArduPilot
 
@@ -152,14 +152,14 @@ class FlightInterface:
 ```
 
 **Features:**
-- 🛰️ Real-time telemetry (GPS, battery, attitude)
-- 🎮 Flight mode control
-- 📡 MAVLink command handling
-- 🛡️ Safety parameter enforcement
+- Real-time telemetry (GPS, battery, attitude)
+- Flight mode control
+- MAVLink command handling
+- Safety parameter enforcement
 
 ---
 
-### 3. 🗺️ SLAM Navigation Module
+### 3. SLAM Navigation Module
 
 **Purpose:** Tracks position via visual SLAM using bottom-facing camera
 
@@ -172,14 +172,14 @@ class SLAMNavigator:
 ```
 
 **Capabilities:**
-- 📸 ORB-SLAM implementation
-- 🏠 Home position reference
-- 🗺️ Real-time map building
-- 📊 Drift detection with confidence scoring
+- ORB-SLAM implementation
+- Home position reference
+- Real-time map building
+- Drift detection with confidence scoring
 
 ---
 
-### 4. 👁️ Computer Vision Module
+### 4. Computer Vision Module
 
 **Purpose:** Detects and tracks objects using YOLOv8
 
@@ -192,14 +192,14 @@ class VisionProcessor:
 ```
 
 **Intelligence:**
-- 🤖 Real-time YOLOv8n inference
-- 🎯 Multi-object tracking
-- 📏 Distance estimation
-- 📹 GPS-tagged media capture
+- Real-time YOLOv8n inference
+- Multi-object tracking
+- Distance estimation
+- GPS-tagged media capture
 
 ---
 
-### 5. 🗣️ Command Interpreter Module
+### 5. Command Interpreter Module
 
 **Purpose:** Converts high-level commands into drone actions
 
@@ -228,7 +228,7 @@ class CommandInterpreter:
 
 ---
 
-### 6. 🛡️ Safety Monitor Module
+### 6. Safety Monitor Module
 
 **Purpose:** Continuous safety and health monitoring
 
@@ -241,14 +241,14 @@ class SafetyMonitor:
 ```
 
 **Safety Features:**
-- 🔋 Smart battery reserve calculation
-- 🚧 Geofence boundary enforcement
-- 💓 System health monitoring
-- 🚨 Automatic emergency RTL
+- Smart battery reserve calculation
+- Geofence boundary enforcement
+- System health monitoring
+- Automatic emergency RTL
 
 ---
 
-### 7. 📊 Data Logger Module
+### 7. Data Logger Module
 
 **Purpose:** Mission telemetry and data recording
 
@@ -261,12 +261,12 @@ class DataLogger:
 ```
 
 **Data Management:**
-- ⏰ Timestamped event logging
-- 📁 Organized media storage
-- 📈 Flight path and telemetry logs
-- 📋 Automated mission reports
+- Timestamped event logging
+- Organized media storage
+- Flight path and telemetry logs
+- Automated mission reports
 
-## 📄 Mission Configuration
+## Mission Configuration
 
 ### Program Objectives File Format
 
@@ -317,39 +317,39 @@ Missions are defined in JSON format on USB drive:
 }
 ```
 
-## 🔄 System Flow
+## System Flow
 
-### 🚀 Startup Sequence
+### Startup Sequence
 
 ```
-1. 🔌 Boot & Initialize → Load modules & connect flight controller
-2. 💾 Mission Load → Parse objectives from USB
-3. ✅ Pre-Flight Check → Verify all systems green
-4. 🗺️ SLAM Initialize → Set home position reference
-5. 🛫 Takeoff → Begin mission at safe altitude
+1. Boot & Initialize → Load modules & connect flight controller
+2. Mission Load → Parse objectives from USB
+3. Pre-Flight Check → Verify all systems green
+4. SLAM Initialize → Set home position reference
+5. Takeoff → Begin mission at safe altitude
 ```
 
-### ⚙️ Mission Loop
+### Mission Loop
 
-- 🔍 **Continuous Monitoring**: Safety & health checks every 100ms
-- 📋 **Objective Processing**: Parse and execute mission commands
-- 🧭 **Sensor Fusion**: SLAM + GPS + vision integration  
-- 📊 **Data Recording**: Log all events and telemetry
-- 🤔 **Decision Making**: Adaptive behavior based on conditions
+- **Continuous Monitoring**: Safety & health checks every 100ms
+- **Objective Processing**: Parse and execute mission commands
+- **Sensor Fusion**: SLAM + GPS + vision integration  
+- **Data Recording**: Log all events and telemetry
+- **Decision Making**: Adaptive behavior based on conditions
 
-### 🚨 Emergency Handling
+### Emergency Handling
 
 | Trigger | Response | Fallback |
 |---------|----------|----------|
-| 🔋 Low Battery | Immediate RTL | Critical landing |
-| 🗺️ SLAM Failure | GPS-only mode | Manual override |
-| 👁️ Vision Loss | Continue without tracking | Basic waypoints |
-| 📡 Comm Loss | Execute RTL protocol | Autonomous return |
-| 🚧 Geofence Breach | Forced return | Emergency stop |
+| Low Battery | Immediate RTL | Critical landing |
+| SLAM Failure | GPS-only mode | Manual override |
+| Vision Loss | Continue without tracking | Basic waypoints |
+| Comm Loss | Execute RTL protocol | Autonomous return |
+| Geofence Breach | Forced return | Emergency stop |
 
-## 🗓️ Development Roadmap
+## Development Roadmap
 
-### ✅ Phase 1: Foundation *(Completed)*
+### Phase 1: Foundation *(Completed)*
 - [x] Flight Interface Module
 - [x] Basic Mission Controller  
 - [x] Safety Monitor Framework
@@ -372,9 +372,9 @@ Missions are defined in JSON format on USB drive:
 - [ ] Emergency scenario simulation
 - [ ] Performance optimization
 
-## 🛠️ Technical Requirements
+## Technical Requirements
 
-### 🖥️ Hardware
+### Hardware
 - **Computer**: Raspberry Pi 4+ (4GB RAM) or NVIDIA Jetson Nano
 - **Cameras**: 
   - Bottom-facing camera (SLAM navigation)
@@ -382,7 +382,7 @@ Missions are defined in JSON format on USB drive:
 - **Storage**: USB 3.0 drive for missions
 - **Flight Controller**: ArduPilot-compatible (Pixhawk, etc.)
 
-### 📦 Software Dependencies
+### Software Dependencies
 
 ```bash
 # Core dependencies
@@ -402,14 +402,14 @@ pip install pillow>=8.0.0
 pip install pyyaml>=6.0
 ```
 
-### 📋 System Requirements
+### System Requirements
 - **OS**: Ubuntu 20.04+ or Raspberry Pi OS
 - **Python**: 3.8 or higher
 - **Memory**: 4GB RAM minimum (8GB recommended)
 - **Storage**: 32GB+ for logs and media
 - **Network**: WiFi for telemetry (optional)
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Clone repository
@@ -429,45 +429,3 @@ python scripts/system_check.py
 # Start mission controller
 python main.py --config config/local.yaml
 ```
-
-## 📖 Documentation
-
-- [📘 Installation Guide](docs/installation.md)
-- [🎯 Mission Planning](docs/mission-planning.md)
-- [⚙️ Configuration Reference](docs/configuration.md)
-- [🔧 Hardware Setup](docs/hardware-setup.md)
-- [🛠️ Troubleshooting](docs/troubleshooting.md)
-- [📊 API Reference](docs/api-reference.md)
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **ArduPilot Community** for flight controller integration
-- **Ultralytics** for YOLOv8 computer vision
-- **OpenCV Team** for computer vision libraries
-- **ORB-SLAM Authors** for SLAM implementation
-
-## 📞 Support
-
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/autonomous-drone-system/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/autonomous-drone-system/discussions)
-- 📧 **Email**: support@yourproject.com
-
----
-
-⭐ **Star this repository if you find it helpful!**
-
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/autonomous-drone-system.svg?style=social&label=Star)](https://github.com/yourusername/autonomous-drone-system)
