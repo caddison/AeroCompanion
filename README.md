@@ -216,7 +216,7 @@ class CommandInterpreter:
 
 | Command | Description | Use Case |
 |---------|-------------|----------|
-| `hover` | Maintain position using SLAM + GPS | Stable observation |
+| `hover` | Maintain position using computer vision | Stable observation |
 | `track` | Follow object at defined distance | Wildlife monitoring |
 | `guard` | Circle/patrol an area | Perimeter security |
 | `find` | Search pattern for specific target | Search & rescue |
@@ -224,7 +224,7 @@ class CommandInterpreter:
 | `recon` | Map and scan defined region | Area mapping |
 | `goto` | Navigate to coordinates | Waypoint missions |
 | `return` | Return home using SLAM/GPS | Mission completion |
-| `counter` | Defensive/reactive behavior | **⚠️ Experimental** |
+| `counter` | Defensive/reactive behavior | Mission completion |
 
 ---
 
