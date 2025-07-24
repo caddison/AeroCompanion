@@ -91,7 +91,6 @@ These commands are designed for a wide range of commercial applications and allo
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green.svg)](https://opencv.org)
 [![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-orange.svg)](https://ultralytics.com)
 [![MAVLink](https://img.shields.io/badge/MAVLink-2.0-red.svg)](https://mavlink.io)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 > **Phase 2**: Transitioning from command-based manual operation to fully autonomous, modular system with USB mission profiles
 
