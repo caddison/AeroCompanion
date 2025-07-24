@@ -280,11 +280,11 @@ Missions are defined in JSON format on USB drive:
     "location": "yellowstone_sector_7"
   },
   "parameters": {
-    "max_flight_time": 1200,     // seconds
-    "battery_reserve": 20,       // percentage
-    "max_altitude": 50,          // meters
-    "track_distance": 15,        // meters
-    "geofence_radius": 500       // meters
+    "max_flight_time": 1200,     
+    "battery_reserve": 20,       
+    "max_altitude": 50,          
+    "track_distance": 15,        
+    "geofence_radius": 500       
   },
   "objectives": [
     {
@@ -353,19 +353,19 @@ Missions are defined in JSON format on USB drive:
 - [x] Basic Mission Controller  
 - [x] Safety Monitor Framework
 
-### 🔧 Phase 2: Navigation *(Current Phase)*
+### Phase 2: Navigation *(Current Phase)*
 - [ ] SLAM Navigation Module
 - [ ] Command Interpreter (basic commands)
 - [ ] USB Program Objectives Parser
 - [ ] Integration testing
 
-### 🔍 Phase 3: Intelligence *(Q4 2024)*
+### Phase 3: Intelligence *(Q4 2024)*
 - [ ] Computer Vision Module (YOLOv8)
 - [ ] Advanced command implementations
 - [ ] Data Logger with analytics
 - [ ] Machine learning integration
 
-### 🧪 Phase 4: Field Testing *(Q1 2025)*
+### Phase 4: Field Testing *(Q1 2025)*
 - [ ] Full module integration
 - [ ] Real-world field testing
 - [ ] Emergency scenario simulation
