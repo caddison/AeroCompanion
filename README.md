@@ -182,7 +182,6 @@ graph TD
 | `recon` | Map and scan defined region | Area mapping |
 | `goto` | Navigate to coordinates | Waypoint missions |
 | `return` | Return home using SLAM/GPS | Mission completion |
-| `counter` | Defensive/reactive behavior | Mission completion |
 
 ---
 
