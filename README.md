@@ -122,14 +122,6 @@ graph TD
 
 **Purpose:** Central coordinator that orchestrates all other modules
 
-```python
-class MissionController:
-    def load_program_objectives()      # Parse USB mission files
-    def execute_mission_loop()         # Main execution cycle
-    def handle_emergency_abort()       # Emergency procedures
-    def coordinate_module_communication()  # Inter-module messaging
-```
-
 **Key Responsibilities:**
 - Parse Program Objectives from USB
 - Maintain mission state machine
@@ -141,14 +133,6 @@ class MissionController:
 ### 2. Flight Interface Module
 
 **Purpose:** Handles MAVLink communication with ArduPilot
-
-```python
-class FlightInterface:
-    def connect_to_ardupilot()    # Establish MAVLink connection
-    def send_movement_commands()  # Execute flight commands
-    def get_telemetry_data()     # Real-time flight data
-    def set_flight_modes()       # GUIDED, RTL, LAND modes
-```
 
 **Features:**
 - Real-time telemetry (GPS, battery, attitude)
@@ -162,14 +146,6 @@ class FlightInterface:
 
 **Purpose:** Tracks position via visual SLAM using bottom-facing camera
 
-```python
-class SLAMNavigator:
-    def initialize_home_position()   # Set reference point
-    def update_position_estimate()   # Continuous tracking
-    def track_relative_movement()    # Movement calculations
-    def detect_position_drift()      # Confidence monitoring
-```
-
 **Capabilities:**
 - ORB-SLAM implementation
 - Home position reference
@@ -182,14 +158,6 @@ class SLAMNavigator:
 
 **Purpose:** Detects and tracks objects using YOLOv8
 
-```python
-class VisionProcessor:
-    def detect_objects()          # YOLOv8 inference
-    def track_targets()          # Multi-object tracking
-    def estimate_target_distance() # Distance calculation
-    def capture_images_video()    # Media recording
-```
-
 **Intelligence:**
 - Real-time YOLOv8n inference
 - Multi-object tracking
@@ -201,15 +169,6 @@ class VisionProcessor:
 ### 5. Command Interpreter Module
 
 **Purpose:** Converts high-level commands into drone actions
-
-```python
-class CommandInterpreter:
-    def parse_command()    # Command parsing
-    def execute_hover()    # Position holding
-    def execute_track()    # Target following
-    def execute_surveil()  # Area monitoring
-    def execute_goto()     # Waypoint navigation
-```
 
 **Supported Commands:**
 
@@ -231,14 +190,6 @@ class CommandInterpreter:
 
 **Purpose:** Continuous safety and health monitoring
 
-```python
-class SafetyMonitor:
-    def monitor_battery_levels()      # Power management
-    def check_flight_boundaries()     # Geofence enforcement
-    def detect_system_failures()      # Health checks
-    def initiate_emergency_procedures() # RTL protocols
-```
-
 **Safety Features:**
 - Smart battery reserve calculation
 - Geofence boundary enforcement
@@ -250,14 +201,6 @@ class SafetyMonitor:
 ### 7. Data Logger Module
 
 **Purpose:** Mission telemetry and data recording
-
-```python
-class DataLogger:
-    def log_mission_events()     # Event timestamps
-    def save_video_images()      # Media storage
-    def record_telemetry()       # Flight data
-    def generate_mission_report() # Post-mission analysis
-```
 
 **Data Management:**
 - Timestamped event logging
