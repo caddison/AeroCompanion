@@ -118,7 +118,7 @@ graph TD
 
 ## Core Modules
 
-### 1. Mission Controller (Main Brain)
+### 1. Mission Controller
 
 **Purpose:** Central coordinator that orchestrates all other modules
 
