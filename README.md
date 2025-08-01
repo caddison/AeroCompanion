@@ -144,7 +144,7 @@ graph TD
 
 ### 3. SLAM Navigation Module
 
-**Purpose:** Tracks position via visual SLAM using bottom-facing camera
+**Purpose:** Tracks position via visual SLAM using bottom-facing camera and AI HAT+
 
 **Capabilities:**
 - ORB-SLAM implementation
@@ -155,7 +155,7 @@ graph TD
 
 ### 4. Computer Vision Module
 
-**Purpose:** Detects and tracks objects using YOLOv8
+**Purpose:** Detects and tracks objects using AI HAT+
 
 **Intelligence:**
 - Real-time YOLOv8n inference
