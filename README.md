@@ -288,7 +288,7 @@ Missions are defined in JSON format on USB drive:
 ### Phase 1: Foundation *(Completed)*
 - [x] Flight Interface Module
 - [x] Basic Mission Controller  
-- [x] Safety Monitor Framework
+- [ ] Safety Monitor Framework
 
 ### Phase 2: Navigation *(Current Phase)*
 - [ ] SLAM Navigation Module
