@@ -149,8 +149,7 @@ graph TD
 **Capabilities:**
 - ORB-SLAM implementation
 - Home position reference
-- Real-time map building
-- Drift detection with confidence scoring
+- Drift detection
 
 ---
 
@@ -160,7 +159,7 @@ graph TD
 
 **Intelligence:**
 - Real-time YOLOv8n inference
-- Multi-object tracking
+- Object tracking
 - Distance estimation
 - GPS-tagged media capture
 
@@ -203,9 +202,8 @@ graph TD
 
 **Data Management:**
 - Timestamped event logging
-- Organized media storage
 - Flight path and telemetry logs
-- Automated mission reports
+- Mission reports
 
 ## Mission Configuration
 
@@ -284,8 +282,6 @@ Missions are defined in JSON format on USB drive:
 |---------|----------|----------|
 | Low Battery | Immediate RTL | Critical landing |
 | SLAM Failure | GPS-only mode | Manual override |
-| Vision Loss | Continue without tracking | Basic waypoints |
-| Comm Loss | Execute RTL protocol | Autonomous return |
 | Geofence Breach | Forced return | Emergency stop |
 
 ## Development Roadmap
@@ -297,14 +293,14 @@ Missions are defined in JSON format on USB drive:
 
 ### Phase 2: Navigation *(Current Phase)*
 - [ ] SLAM Navigation Module
-- [ ] Command Interpreter (basic commands)
-- [ ] USB Program Objectives Parser
+- [x] Command Interpreter
+- [x] USB Program Objectives Parser
 - [ ] Integration testing
 
 ### Phase 3: Intelligence
-- [ ] Computer Vision Module (YOLOv8)
+- [x] Computer Vision Module (YOLOv8)
 - [ ] Advanced command implementations
-- [ ] Data Logger with analytics
+- [x] Data Logger with analytics
 - [ ] Machine learning integration
 
 ### Phase 4: Field Testing 
