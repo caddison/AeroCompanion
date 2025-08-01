@@ -161,7 +161,6 @@ graph TD
 - Real-time YOLOv8n inference
 - Object tracking
 - Distance estimation
-- GPS-tagged media capture
 
 ---
 
