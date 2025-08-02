@@ -1,4 +1,11 @@
-# Aero Companion
+# Aero Companion Drone System Architecture
+
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
+[![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green.svg)](https://opencv.org)
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-orange.svg)](https://ultralytics.com)
+[![MAVLink](https://img.shields.io/badge/MAVLink-2.0-red.svg)](https://mavlink.io)
+
+**Phase 1**: Implementing semi-autonomous capabilities with manned pilots controlling drones through user-friendly web applications
 
 Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/AeroCompanion/wiki) This project is dedicated to creating an autonomous drone that boasts cutting-edge capabilities including real-time video streaming, computer vision, and GPS-independent navigation. Below you will find an in-depth overview of the project, including its components and functionalities. 
 
