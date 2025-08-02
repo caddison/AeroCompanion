@@ -13,6 +13,7 @@ Welcome to the repository for [**Aero Companion!**](https://github.com/caddison/
 
 ---
 
+
 ## Project Overview
 
 This project leverages the capabilities of the Raspberry Pi 5 and Pixhawk 6X flight controller to create a cutting-edge drone capable of executing complex autonomous tasks. The drone is designed to operate without GPS, utilizing IMU data and computer vision for navigation.
@@ -91,6 +92,7 @@ These commands are designed for a wide range of commercial applications and allo
 
 ![Screenshot by Snip My on Mar 11, 2025 at 6 55 49 PM](https://github.com/user-attachments/assets/53867f50-8075-4b4a-ae29-7ddaee4b8605)
 
+<img width="810" height="500" alt="skynet" src="https://github.com/user-attachments/assets/5eef0489-0114-42ab-bbf5-18ba931d37fe" />
 
 # Autonomous Drone System Architecture
 
