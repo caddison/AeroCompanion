@@ -110,8 +110,6 @@ An intelligent drone system that reads mission objectives from USB and executes 
 
 ## System Overview
 
-The architecture consists of **7 independent Python modules** coordinated by a central mission controller:
-
 ```mermaid
 graph TD
     A[Mission Controller] --> B[Flight Interface]
