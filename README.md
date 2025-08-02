@@ -333,7 +333,7 @@ In this phase, Aero Companion transitions from manual or pre-scripted operation 
 
 # n8n Workflow Integration
 
-Enhance your Aero Companion drone operations with intelligent automation workflows using n8n. These integrations transform your autonomous drone into a complete business solution that seamlessly connects with existing enterprise systems.
+Using n8n these integrations transform your autonomous drone into a complete business solution that seamlessly connects with existing enterprise systems.
 
 ## Real-Time Alert & Response Workflows
 
